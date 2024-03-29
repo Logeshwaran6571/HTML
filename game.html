@@ -1,1 +1,61 @@
-logeshwaran.s
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Game</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #game-container {
+    margin-top: 50px;
+  }
+  #score {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .ball {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="game-container">
+  <div id="score">Score: <span id="score-value">0</span></div>
+</div>
+
+<script>
+  let score = 0;
+
+  function createBall() {
+    const ball = document.createElement('div');
+    ball.className = 'ball';
+    const maxX = window.innerWidth - 50;
+    const maxY = window.innerHeight - 50;
+    ball.style.left = Math.random() * maxX + 'px';
+    ball.style.top = Math.random() * maxY + 'px';
+    ball.addEventListener('click', function() {
+      score++;
+      document.getElementById('score-value').textContent = score;
+      this.remove();
+      createBall();
+    });
+    document.getElementById('game-container').appendChild(ball);
+  }
+
+  // Create initial balls
+  for (let i = 0; i < 10; i++) {
+    createBall();
+  }
+</script>
+
+</body>
+</html>
